@@ -177,14 +177,14 @@ PLATFORMS
   arm64-darwin-21
 
 DEPENDENCIES
-  annotate
+  annotate (~> 3.2.0)
   bootsnap
   debug
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4)
-  rspec
-  rspec-rails
+  rspec (~> 3.11.0)
+  rspec-rails (~> 6.0.0)
   tzinfo-data
 
 RUBY VERSION
