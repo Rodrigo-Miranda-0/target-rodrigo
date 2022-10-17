@@ -198,15 +198,15 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
-  brakeman
+  brakeman (~> 5.3.1)
   debug
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4)
   rails_best_practices (~> 1.23, >= 1.23.1)
-  reek
+  reek (~> 6.1.1)
   rubocop (~> 1.36)
-  rubocop-rails
+  rubocop-rails (~> 2.16.1)
   tzinfo-data
 
 RUBY VERSION
