@@ -2,3 +2,9 @@ inherit_from: .rubocop_todo.yml
 require: rubocop-rails
 AllCops:
   NewCops: enable
+  Exclude:
+    - 'lib/tasks/**/*'
+    - 'bin/**/*'
+    - 'db/schema.rb'
+    - 'db/migrate/**/*'
+    - 'vendor/**/*'
