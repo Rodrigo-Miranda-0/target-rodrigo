@@ -1,0 +1,60 @@
+name: Verify
+on: [push]
+
+jobs:
+  linters:
+    name: Linters
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Rubocop
+        run: bundle exec rubocop --parallel 
+
+      - name: Reek
+        run: bundle exec reek
+
+      - name: Rails Best Practices
+        run: bundle exec rails_best_practices
+
+      - name: Brakeman
+        run: bundle exec brakeman -q -w2
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12.7
+        env:
+          POSTGRES_USER: target_user
+          POSTGRES_DB: target_test
+          POSTGRES_PASSWORD: "postgres"
+        ports: ["5432:5432"]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup test database
+        env:
+          RAILS_ENV: test
+          PGHOST: localhost
+          PGUSER: target_user
+          PGPASSWORD: postgres
+        run: |
+          bundle exec rails db:setup
+
+      - name: Run tests
+        run: bundle exec rspec
