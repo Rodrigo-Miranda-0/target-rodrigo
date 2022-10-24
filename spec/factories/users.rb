@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
@@ -19,10 +17,10 @@
 #  index_users_on_email             (email) UNIQUE
 #  index_users_on_uid_and_provider  (uid,provider) UNIQUE
 #
-class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-  include DeviseTokenAuth::Concerns::User
+FactoryBot.define do
+  factory :user do
+    email { Faker::Internet.unique.email }
+    password { Faker::Internet.password(min_length: 8) }
+    gender { Faker::Gender.binary_type }
+  end
 end
