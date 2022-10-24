@@ -2,7 +2,7 @@ require 'rails_helper'
 require "rspec/json_expectations"
 
 describe 'Create User', type: :request do
-  subject { post '/auth', params:, as: :json }
+  subject { post '/api/v1/auth', params:, as: :json }
 
   let(:email)                 { 'test@test.com' }
   let(:password)              { '12345678' }
@@ -50,7 +50,7 @@ describe 'Create User', type: :request do
         expect { subject }.to change { User.count }.by(0)
       end
 
-      it 'should return the error message' do
+      it 'should return the error message (Password match)' do
         subject
         expect(response.body).to include_json(
           errors: {
@@ -72,7 +72,7 @@ describe 'Create User', type: :request do
         expect { subject }.to change { User.count }.by(0)
       end
 
-      it 'should return the error message' do
+      it 'should return the error message (Email format)' do
         subject
         expect(response.body).to include_json(
           errors: {

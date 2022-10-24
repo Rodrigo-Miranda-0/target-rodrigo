@@ -9,6 +9,9 @@ AllCops:
     - 'db/migrate/**/*'
     - 'vendor/**/*'
 
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
 
-Metrics/ClassLength:
+Style/Documentation:
   Enabled: false
