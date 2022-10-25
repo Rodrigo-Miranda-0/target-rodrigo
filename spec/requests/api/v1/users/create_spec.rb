@@ -19,7 +19,7 @@ describe 'Create User', type: :request do
   end
 
   context 'Correctly register the user' do
-    it 'should return status code (200)' do
+    it 'should return a sucessfull response' do
       subject
       expect(response).to have_http_status(:ok)
     end
@@ -41,13 +41,13 @@ describe 'Create User', type: :request do
   context 'Incorrectly register the user' do
     context 'Incorrect credentials' do
       let(:password) { "87654321" }
-      it 'should return status code (422)' do
+      it 'should return an unprocessable entity status' do
         subject
         expect(response).to have_http_status(:unprocessable_entity)
       end
 
       it 'should not add the user to the database' do
-        expect { subject }.to change { User.count }.by(0)
+        expect { subject }.not_to change(User, :count)
       end
 
       it 'should return the error message (Password match)' do
@@ -61,15 +61,16 @@ describe 'Create User', type: :request do
         )
       end
     end
+
     context 'Incorrect email' do
       let(:email) { "notAnEmail" }
-      it 'should return status code (422)' do
+      it 'should return an unprocessable entity status' do
         subject
         expect(response).to have_http_status(:unprocessable_entity)
       end
 
       it 'should not add the user to the database' do
-        expect { subject }.to change { User.count }.by(0)
+        expect { subject }.not_to change(User, :count)
       end
 
       it 'should return the error message (Email format)' do
