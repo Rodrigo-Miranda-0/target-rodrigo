@@ -1,36 +1,13 @@
-name: Verify
+name: Liters and tests. # TODO: rename your action
+
 on: [push]
 
 jobs:
-  linters:
-    name: Linters
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
 
-      - name: Setup Ruby and install gems
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-
-      - name: Rubocop
-        run: bundle exec rubocop --parallel 
-
-      - name: Reek
-        run: bundle exec reek
-
-      - name: Rails Best Practices
-        run: bundle exec rails_best_practices
-
-      - name: Brakeman
-        run: bundle exec brakeman -q -w2
-
-  tests:
-    name: Tests
-    runs-on: ubuntu-latest
     services:
-      postgres:
+      db:
         image: postgres:12.7
         env:
           POSTGRES_USER: postgres
@@ -43,22 +20,35 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     
-    env: 
+    env:
       RAILS_ENV: test
-      
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Ruby and install gems
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
 
       - name: Setup Database
         run: |
-          cp .github/test_db/config/database.yml config/database.yml
           bundle exec rails db:create db:migrate
 
-      - name: Run tests
-        run: bundle exec rspec
+      - name: Run Rubocop
+        run: |
+          bundle exec rubocop
+      
+            - name: Reek
+        run: bundle exec reek
+
+      - name: Rails Best Practices
+        run: bundle exec rails_best_practices
+
+      - name: Brakeman
+        run: bundle exec brakeman -q -w2
+
+      - name: Run Tests
+        run: |
+          bundle exec rspec
