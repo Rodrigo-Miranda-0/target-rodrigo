@@ -33,10 +33,18 @@ jobs:
       postgres:
         image: postgres:12.7
         env:
-          POSTGRES_USER: target_user
-          POSTGRES_DB: target_test
-          POSTGRES_PASSWORD: "postgres"
-        ports: ["5432:5432"]
+          POSTGRES_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
+    env: 
+      RAILS_ENV: test
 
     steps:
       - name: Checkout code
@@ -47,14 +55,10 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Setup test database
-        env:
-          RAILS_ENV: test
-          PGHOST: localhost
-          PGUSER: target_user
-          PGPASSWORD: postgres
+      - name: Setup Database
         run: |
-          bundle exec rails db:setup
+          cp .github/test_db/config/database.yml config/database.yml
+          bundle exec rails db:create db:migrate
 
       - name: Run tests
         run: bundle exec rspec
