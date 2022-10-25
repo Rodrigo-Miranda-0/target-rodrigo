@@ -26,5 +26,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  enum :gender, [:male, :female, :other]
+  enum gender: { female: 0, male: 1, other: 2 }
 end
