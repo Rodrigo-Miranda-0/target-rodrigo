@@ -7,7 +7,7 @@ describe 'Create User', type: :request do
   let(:email)                 { 'test@test.com' }
   let(:password)              { '12345678' }
   let(:password_confirmation) { '12345678' }
-  let(:gender)                { 'Male' }
+  let(:gender)                { 0 }
 
   let(:params) do
     {

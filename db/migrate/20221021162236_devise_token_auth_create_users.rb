@@ -10,7 +10,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[7.0]
 
       # User info
       t.string :email
-      t.enum gender: [:female, :male]
+      t.integer :gender, :default => 0
 
       ## Tokens
       t.json :tokens
