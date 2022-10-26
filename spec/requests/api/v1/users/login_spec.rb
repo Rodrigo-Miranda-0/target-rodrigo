@@ -1,5 +1,4 @@
 require 'rails_helper'
-require "rspec/json_expectations"
 
 describe 'Login User', type: :request do
   subject { post user_session_path, params:, as: :json }
@@ -29,8 +28,8 @@ describe 'Login User', type: :request do
     end
   end
 
-  context 'Incorrectly login the user' do
-    context 'Incorrect credentials' do
+  context 'when fails' do
+    context 'with invalid credentials' do
       let(:params) do
         {
           email: user.email,

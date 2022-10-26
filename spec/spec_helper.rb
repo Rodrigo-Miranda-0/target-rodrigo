@@ -90,6 +90,8 @@ RSpec.configure do |config|
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
 
+  require "rspec/json_expectations"
+
   RSpec.configure do |spec_config|
     spec_config.formatter = :documentation
   end
