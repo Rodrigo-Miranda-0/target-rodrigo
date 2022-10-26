@@ -21,6 +21,6 @@ FactoryBot.define do
   factory :user do
     email { Faker::Internet.unique.email }
     password { Faker::Internet.password(min_length: 8) }
-    gender { Faker::Gender.binary_type }
+    gender { rand(0..2) }
   end
 end
