@@ -2,17 +2,15 @@ require 'rails_helper'
 require "rspec/json_expectations"
 
 describe 'Login User', type: :request do
-  subject { post '/api/v1/auth/sign_in', params:, as: :json }
+  subject { post user_session_path, params:, as: :json }
 
-  before(:each) do
-    @current_user = FactoryBot.create(:user)
-  end
+  let!(:user) { create(:user) }
 
   context 'Correctly login the user' do
     let(:params) do
       {
-        email: @current_user.email,
-        password: @current_user.password
+        email: user.email,
+        password: user.password
       }
     end
 
@@ -25,7 +23,7 @@ describe 'Login User', type: :request do
       subject
       expect(response.body).to include_json(
         data: {
-          email: @current_user.email
+          email: user.email
         }
       )
     end
@@ -35,7 +33,7 @@ describe 'Login User', type: :request do
     context 'Incorrect credentials' do
       let(:params) do
         {
-          email: @current_user.email,
+          email: user.email,
           password: "12345678"
         }
       end
