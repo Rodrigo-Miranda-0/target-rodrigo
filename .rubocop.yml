@@ -8,3 +8,13 @@ AllCops:
     - 'db/schema.rb'
     - 'db/migrate/**/*'
     - 'vendor/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+
+Style/Documentation:
+  Enabled: false
+
+Rails/FilePath:
+  Enabled: false
