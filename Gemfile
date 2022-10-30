@@ -13,7 +13,7 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-# gem "jbuilder"
+gem "jbuilder", "~> 2.11.5"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -38,6 +38,8 @@ gem "bootsnap", require: false
 
 gem 'devise_token_auth', '~> 1.2.1'
 
+gem 'active_storage_base64', '~> 2.0.0'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
@@ -46,6 +48,11 @@ group :development, :test do
   gem "factory_bot_rails", "~> 6.2.0"
   gem "faker", "2.23.0"
   gem "rspec-json_expectations", "~> 2.2.0"
+  gem "byebug", "~> 11.1.3"
+end
+
+group :test do
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 group :development do
