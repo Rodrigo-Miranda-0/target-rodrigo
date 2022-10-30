@@ -1,22 +1,12 @@
 require 'rails_helper'
 
 describe 'Logout User', type: :request do
-  subject { delete '/api/v1/auth/sign_out', headers:, as: :json }
+  subject { delete destroy_user_session_path, headers:, as: :json }
 
-  before(:each) do
-    @current_user = FactoryBot.create(:user)
-    @headers = @current_user.create_new_auth_token
-  end
+  let(:user) { create(:user) }
+  let(:headers) { user.create_new_auth_token }
 
-  context 'Correctly logout the user' do
-    let(:headers) do
-      {
-        'access-token': @headers['access-token'],
-        client: @headers['client'],
-        uid: @headers['uid']
-      }
-    end
-
+  context 'when success' do
     it 'should return a sucessfull response' do
       subject
       expect(response).to have_http_status(:ok)

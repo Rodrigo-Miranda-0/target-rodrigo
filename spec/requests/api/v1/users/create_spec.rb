@@ -17,7 +17,7 @@ describe 'Create User', type: :request do
     }
   end
 
-  context 'Correctly register the user' do
+  context 'when success' do
     it 'should return a sucessfull response' do
       subject
       expect(response).to have_http_status(:ok)

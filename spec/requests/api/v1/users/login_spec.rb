@@ -5,7 +5,7 @@ describe 'Login User', type: :request do
 
   let!(:user) { create(:user) }
 
-  context 'Correctly login the user' do
+  context 'when success' do
     let(:params) do
       {
         email: user.email,
