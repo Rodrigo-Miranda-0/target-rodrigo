@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Get topics', type: :request do
-  subject { get api_v1_topic_path, headers:, as: :json }
+  subject { get api_v1_topic_index_path, headers:, as: :json }
 
   let(:user) { create(:user) }
   let(:headers) { user.create_new_auth_token }

@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 FactoryBot.define do
-  test_image = Base64.encode64(File.binread("app/assets/test_image.png"))
+  test_image = Base64.encode64(File.binread("spec/fixtures/test_image.png"))
   factory :topic do
     name { Faker::Lorem.word }
     image { { io: StringIO.new(test_image), filename: "test_image.png", content_type: "image/png" } }
