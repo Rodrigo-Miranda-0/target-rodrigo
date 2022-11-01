@@ -1,5 +1,3 @@
-## Get all topics
-
 require 'rails_helper'
 
 describe 'Get topics', type: :request do
