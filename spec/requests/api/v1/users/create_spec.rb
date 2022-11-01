@@ -1,5 +1,4 @@
 require 'rails_helper'
-require "rspec/json_expectations"
 
 describe 'Create User', type: :request do
   subject { post '/api/v1/auth', params:, as: :json }
@@ -18,7 +17,7 @@ describe 'Create User', type: :request do
     }
   end
 
-  context 'Correctly register the user' do
+  context 'when success' do
     it 'should return a sucessfull response' do
       subject
       expect(response).to have_http_status(:ok)
@@ -38,8 +37,8 @@ describe 'Create User', type: :request do
     end
   end
 
-  context 'Incorrectly register the user' do
-    context 'Incorrect credentials' do
+  context 'when fails' do
+    context 'with invalid credentials' do
       let(:password) { "87654321" }
       it 'should return an unprocessable entity status' do
         subject
@@ -62,7 +61,7 @@ describe 'Create User', type: :request do
       end
     end
 
-    context 'Incorrect email' do
+    context 'with invalid email' do
       let(:email) { "notAnEmail" }
       it 'should return an unprocessable entity status' do
         subject

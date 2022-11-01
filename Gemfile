@@ -36,7 +36,7 @@ gem "bootsnap", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
 
-gem 'devise_token_auth', '~> 1.2.1'
+gem 'devise_token_auth', ' >= 1.2.1', git: 'https://github.com/lynndylanhurley/devise_token_auth'
 
 gem 'active_storage_base64', '~> 2.0.0'
 
