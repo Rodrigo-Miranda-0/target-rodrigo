@@ -13,6 +13,7 @@ detectors:
     - ActiveSupport::TestCase
     - Target::Application
 
+
 exclude_paths:
   - config
   - db/migrate
