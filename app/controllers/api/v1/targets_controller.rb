@@ -6,6 +6,12 @@ module Api
         render status: :created, json: @target
       end
 
+      def destroy
+        @target = current_user.targets.find(params[:id])
+        @target.destroy
+        head :no_content
+      end
+
       private
 
       def target_params
