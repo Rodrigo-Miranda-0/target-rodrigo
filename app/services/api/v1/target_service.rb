@@ -9,7 +9,6 @@ module Api
       end
 
       def create
-        # byebug
         location = ActiveRecord::Point.new(@longitude, @latitude)
         @current_user.targets.create!(@target_params.merge(location:))
       end

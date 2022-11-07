@@ -65,7 +65,6 @@ describe 'Create Target', type: :request do
 
       it 'should return the error message (Title cant be blank)' do
         subject
-        p response.body
         expect(response.body).to include_json(
           errors: {
             title: [

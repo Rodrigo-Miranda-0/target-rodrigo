@@ -22,8 +22,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Target < ApplicationRecord
-  belongs_to :topic, dependent: :destroy
-  belongs_to :user, dependent: :destroy
+  belongs_to :topic
+  belongs_to :user
 
   validates :title, presence: true
   validates :radius, presence: true
