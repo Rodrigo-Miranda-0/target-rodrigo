@@ -24,14 +24,12 @@
 require 'rails_helper'
 
 describe 'Target', type: :model do
-  describe 'Validations' do
-    subject { build :target }
-    context 'validations' do
-      it { is_expected.to validate_presence_of(:title) }
-      it { is_expected.to validate_presence_of(:radius) }
-      it { is_expected.to validate_presence_of(:location) }
-      it { should belong_to(:topic) }
-      it { should belong_to(:user) }
-    end
+  subject { build :target }
+  context 'validations' do
+    it { is_expected.to validate_presence_of(:title) }
+    it { is_expected.to validate_presence_of(:radius) }
+    it { is_expected.to validate_presence_of(:location) }
+    it { should belong_to(:topic) }
+    it { should belong_to(:user) }
   end
 end
