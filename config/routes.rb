@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :topic, only: :index
+      resources :targets, only: :create
     end
   end
 end
