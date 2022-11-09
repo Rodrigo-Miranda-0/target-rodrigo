@@ -12,6 +12,11 @@ describe 'Destroy Target', type: :request do
       subject
       expect(response).to have_http_status(:no_content)
     end
+
+    it 'should delete the target' do
+      subject
+      expect(Target.count).to eq(0)
+    end
   end
 
   context 'when fails' do
