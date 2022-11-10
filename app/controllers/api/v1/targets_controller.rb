@@ -3,7 +3,9 @@ module Api
     class TargetsController < ApiController
       def create
         @target = TargetService.new(target_params, current_user, params[:latitude], params[:longitude]).create
-        render status: :created, json: @target
+        render json: @target, status: :created
+      rescue MaxTargetError => e
+        render json: { error: e.message }, status: :unprocessable_entity
       end
 
       private

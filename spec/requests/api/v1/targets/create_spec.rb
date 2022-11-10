@@ -4,6 +4,7 @@ describe 'Create Target', type: :request do
   subject { post api_v1_targets_path, params:, headers:, as: :json }
 
   let(:user) { create(:user) }
+  let!(:user2) { create(:user, :with_targets) }
   let(:topic) { create(:topic) }
   let(:title) { Faker::Lorem.word }
   let(:radius) { Faker::Number.number(digits: 3) }
@@ -71,6 +72,26 @@ describe 'Create Target', type: :request do
               "can't be blank"
             ]
           }
+        )
+      end
+    end
+
+    context 'with max targets reached' do
+      let(:headers) { user2.create_new_auth_token }
+      it 'should return an unprocessable entity status' do
+        subject
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it 'should not add the target to the database' do
+        expect { subject }.not_to change(Target, :count)
+      end
+
+      it 'should return the error message (Max targets reached)' do
+        subject
+        p response.body
+        expect(response.body).to include_json(
+          error: 'Maximum number of targets reached'
         )
       end
     end
