@@ -4,7 +4,7 @@ describe 'Destroy Target', type: :request do
   subject { delete api_v1_target_path(target), headers:, as: :json }
 
   let(:user) { create(:user) }
-  let(:target) { create(:target, user:) }
+  let!(:target) { create(:target, user:) }
   let(:headers) { user.create_new_auth_token }
 
   context 'when success' do
@@ -14,8 +14,7 @@ describe 'Destroy Target', type: :request do
     end
 
     it 'should delete the target' do
-      subject
-      expect(Target.count).to eq(0)
+      expect { subject }.to change(user.targets, :count).by(-1)
     end
   end
 
@@ -29,9 +28,13 @@ describe 'Destroy Target', type: :request do
         }
       end
 
-      it 'should return an entity not found status' do
+      it 'should return an unauthorized status' do
         subject
         expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should not delete the target' do
+        expect { subject }.not_to change(user.targets, :count)
       end
 
       it 'should return the error message (User not found)' do
@@ -67,6 +70,10 @@ describe 'Destroy Target', type: :request do
       it 'should return an entity not found status' do
         subject
         expect(response).to have_http_status(:not_found)
+      end
+
+      it 'should not delete the target' do
+        expect { subject }.not_to change(user.targets, :count)
       end
 
       it 'should return the error message (Target not found)' do
