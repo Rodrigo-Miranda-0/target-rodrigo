@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :topic, only: :index
       resources :user, only: :update
       resources :targets, only: %i[index create destroy]
+      resources :user, only: :update
     end
   end
 end

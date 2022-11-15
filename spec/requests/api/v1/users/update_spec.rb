@@ -4,7 +4,7 @@ describe 'Update User', type: :request do
   subject { put api_v1_user_path(user), params:, headers:, as: :json }
 
   let(:user) { create(:user) }
-  let(:another_usr) { create(:user) }
+  let(:another_user) { create(:user) }
   let(:headers) { user.create_new_auth_token }
   let(:params) do
     {
@@ -54,7 +54,7 @@ describe 'Update User', type: :request do
     end
 
     context 'with invalid user' do
-      let(:headers) { another_usr.create_new_auth_token }
+      let(:headers) { another_user.create_new_auth_token }
 
       it 'should return an unauthorized status' do
         subject
