@@ -7,7 +7,7 @@ module Api
       rescue_from ActiveRecord::RecordNotFound,        with: :render_not_found
       rescue_from ActiveRecord::RecordInvalid,         with: :render_record_invalid
       rescue_from ActionController::ParameterMissing,  with: :render_parameter_missing
-    
+
       private
 
       def render_not_found(exception)
