@@ -4,6 +4,7 @@ describe 'Update User', type: :request do
   subject { put api_v1_user_path(user), params:, headers:, as: :json }
 
   let(:user) { create(:user) }
+  let(:another_usr) { create(:user) }
   let(:headers) { user.create_new_auth_token }
   let(:params) do
     {
@@ -48,6 +49,23 @@ describe 'Update User', type: :request do
           errors: [
             "You need to sign in or sign up before continuing."
           ]
+        )
+      end
+    end
+
+    context 'with invalid user' do
+      let(:headers) { another_usr.create_new_auth_token }
+
+      it 'should return an unauthorized status' do
+        subject
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should return the error message (Uanuthorized)' do
+        subject
+        p response.body
+        expect(response.body).to include_json(
+          error: "You are not authorized to access this resource"
         )
       end
     end

@@ -2,8 +2,12 @@ module Api
   module V1
     class UserController < ApiController
       def update
-        current_user.update(user_params)
-        render json: current_user, status: :ok
+        if current_user.id == params[:id].to_i
+          current_user.update(user_params)
+          render json: current_user, status: :ok
+        else
+          render_unauthorized
+        end
       end
 
       private
