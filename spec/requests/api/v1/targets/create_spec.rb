@@ -78,6 +78,7 @@ describe 'Create Target', type: :request do
 
     context 'with max targets reached' do
       let(:headers) { user2.create_new_auth_token }
+
       it 'should return an unprocessable entity status' do
         subject
         expect(response).to have_http_status(:unprocessable_entity)
@@ -89,7 +90,6 @@ describe 'Create Target', type: :request do
 
       it 'should return the error message (Max targets reached)' do
         subject
-        p response.body
         expect(response.body).to include_json(
           error: 'Maximum number of targets reached'
         )
