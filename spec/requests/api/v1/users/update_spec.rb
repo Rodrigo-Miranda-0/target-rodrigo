@@ -63,7 +63,6 @@ describe 'Update User', type: :request do
 
       it 'should return the error message (Uanuthorized)' do
         subject
-        p response.body
         expect(response.body).to include_json(
           error: "You are not authorized to access this resource"
         )
