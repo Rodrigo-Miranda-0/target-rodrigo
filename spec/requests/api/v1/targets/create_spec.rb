@@ -41,11 +41,6 @@ describe 'Create Target', type: :request do
           {
             title:,
             radius:,
-            location:
-            {
-              x: latitude,
-              y: longitude
-            },
             topic_id: topic.id,
             user_id: user.id
           }
@@ -71,11 +66,6 @@ describe 'Create Target', type: :request do
             {
               title:,
               radius:,
-              location:
-              {
-                x: latitude,
-                y: longitude
-              },
               topic_id: topic.id,
               user_id: user.id
             }

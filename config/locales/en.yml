@@ -6,3 +6,7 @@ en:
       not_found: Couldn't find the record
       unauthorized: You are not authorized to access this resource
       max_targets: Maximum number of targets reached
+  
+  mailer:
+    match:
+      subject: "You have a new match!"
