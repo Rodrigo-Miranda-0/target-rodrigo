@@ -25,30 +25,63 @@ describe 'Create Target', type: :request do
   let(:headers) { user.create_new_auth_token }
 
   context 'when success' do
-    it 'should return a sucessfull response' do
-      subject
-      expect(response).to have_http_status(:created)
-    end
+    context 'non edge case' do
+      it 'should return a sucessfull response' do
+        subject
+        expect(response).to have_http_status(:created)
+      end
 
-    it 'should add the target to the database' do
-      expect { subject }.to change(Target, :count).by(1)
-    end
+      it 'should add the target to the database' do
+        expect { subject }.to change(Target, :count).by(1)
+      end
 
-    it 'should return the target' do
-      subject
-      expect(response.body).to include_json(
-        {
-          title:,
-          radius:,
-          location:
+      it 'should return the target' do
+        subject
+        expect(response.body).to include_json(
           {
-            x: latitude,
-            y: longitude
-          },
-          topic_id: topic.id,
-          user_id: user.id
-        }
-      )
+            title:,
+            radius:,
+            location:
+            {
+              x: latitude,
+              y: longitude
+            },
+            topic_id: topic.id,
+            user_id: user.id
+          }
+        )
+      end
+    end
+
+    context 'edge case' do
+      context 'when there are 9 targets' do
+        let!(:targets) { create_list(:target, 9, user:) }
+        it 'should return a sucessfull response' do
+          subject
+          expect(response).to have_http_status(:created)
+        end
+
+        it 'should add the target to the database' do
+          expect { subject }.to change(Target, :count).by(1)
+        end
+
+        it 'should return the target' do
+          subject
+          expect(response.body).to include_json(
+            {
+              title:,
+              radius:,
+              location:
+              {
+                x: latitude,
+                y: longitude
+              },
+              topic_id: topic.id,
+              user_id: user.id
+            }
+          )
+        end
+      end
     end
   end
 
