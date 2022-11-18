@@ -1,7 +1,7 @@
 class AlterTargerTable < ActiveRecord::Migration[7.0]
   def change
-    remove_column :targets, :latitude
-    remove_column :targets, :longitude
-    add_column :targets, :location, :point, geographic: true
+    remove_column :targets, :latitude, :float
+    remove_column :targets, :longitude, :float
+    add_column :targets, :location, :st_point, geographic: true, null: false
   end
 end

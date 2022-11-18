@@ -3,7 +3,7 @@
 # Table name: targets
 #
 #  id         :bigint           not null, primary key
-#  location   :point
+#  location   :geography        not null, point, 4326
 #  radius     :integer          not null
 #  title      :string           not null
 #  created_at :datetime         not null
@@ -27,7 +27,7 @@ FactoryBot.define do
   factory :target do
     title { Faker::Lorem.word }
     radius { Faker::Number.number(digits: 3) }
-    location { ActiveRecord::Point.new(longitude, latitude) }
+    location { "POINT(#{longitude} #{latitude})" }
     topic { create(:topic) }
     user { create(:user) }
   end
