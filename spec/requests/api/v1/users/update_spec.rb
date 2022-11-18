@@ -9,7 +9,7 @@ describe 'Update User', type: :request do
   let(:params) do
     {
       name: 'John',
-      lastname: 'Doe'
+      last_name: 'Doe'
     }
   end
 
@@ -23,7 +23,7 @@ describe 'Update User', type: :request do
       subject
       expect(response.body).to include_json(
         name: 'John',
-        lastname: 'Doe'
+        last_name: 'Doe'
       )
     end
   end

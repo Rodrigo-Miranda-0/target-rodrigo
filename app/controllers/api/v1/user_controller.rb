@@ -3,7 +3,7 @@ module Api
     class UserController < ApiController
       def update
         if current_user.id == params[:id].to_i
-          current_user.update(user_params)
+          current_user.update!(user_params)
           render json: current_user, status: :ok
         else
           render_unauthorized
@@ -13,7 +13,7 @@ module Api
       private
 
       def user_params
-        params.permit(:name, :lastname, :gender)
+        params.permit(:name, :last_name, :gender)
       end
     end
   end
