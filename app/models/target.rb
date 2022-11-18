@@ -3,7 +3,7 @@
 # Table name: targets
 #
 #  id         :bigint           not null, primary key
-#  location   :point
+#  location   :geography        not null, point, 4326
 #  radius     :integer          not null
 #  title      :string           not null
 #  created_at :datetime         not null
