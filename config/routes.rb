@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :topic, only: :index
       resources :targets, only: %i[index create destroy]
+      resources :conversations, only: :index
     end
   end
 end

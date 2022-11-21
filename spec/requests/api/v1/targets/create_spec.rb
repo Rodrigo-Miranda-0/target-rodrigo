@@ -35,7 +35,6 @@ describe 'Create Target', type: :request do
 
     it 'should return the target' do
       subject
-      p response.body
       expect(response.body).to include_json(
         {
           title:,
