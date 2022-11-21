@@ -8,6 +8,8 @@
 #  email              :string
 #  encrypted_password :string           default(""), not null
 #  gender             :integer          default("female")
+#  last_name          :string
+#  name               :string
 #  provider           :string           default("email"), not null
 #  tokens             :json
 #  uid                :string           default(""), not null

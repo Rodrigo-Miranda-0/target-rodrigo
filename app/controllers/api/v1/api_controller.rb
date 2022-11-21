@@ -24,6 +24,10 @@ module Api
         logger.info { exception } # for logging
         render json: { error: I18n.t('api.errors.missing_param') }, status: :unprocessable_entity
       end
+
+      def render_unauthorized
+        render json: { error: I18n.t('api.errors.unauthorized') }, status: :unauthorized
+      end
     end
   end
 end
