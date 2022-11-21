@@ -4,6 +4,7 @@ describe 'Create Target', type: :request do
   subject { post api_v1_targets_path, params:, headers:, as: :json }
 
   let(:user) { create(:user) }
+  let!(:user2) { create(:user, :with_targets) }
   let(:topic) { create(:topic) }
   let(:title) { Faker::Lorem.word }
   let(:radius) { Faker::Number.number(digits: 3) }
@@ -24,30 +25,63 @@ describe 'Create Target', type: :request do
   let(:headers) { user.create_new_auth_token }
 
   context 'when success' do
-    it 'should return a sucessfull response' do
-      subject
-      expect(response).to have_http_status(:created)
-    end
+    context 'non edge case' do
+      it 'should return a sucessfull response' do
+        subject
+        expect(response).to have_http_status(:created)
+      end
 
-    it 'should add the target to the database' do
-      expect { subject }.to change(Target, :count).by(1)
-    end
+      it 'should add the target to the database' do
+        expect { subject }.to change(Target, :count).by(1)
+      end
 
-    it 'should return the target' do
-      subject
-      expect(response.body).to include_json(
-        {
-          title:,
-          radius:,
-          location:
+      it 'should return the target' do
+        subject
+        expect(response.body).to include_json(
           {
-            x: latitude,
-            y: longitude
-          },
-          topic_id: topic.id,
-          user_id: user.id
-        }
-      )
+            title:,
+            radius:,
+            location:
+            {
+              x: latitude,
+              y: longitude
+            },
+            topic_id: topic.id,
+            user_id: user.id
+          }
+        )
+      end
+    end
+
+    context 'edge case' do
+      context 'when there are 9 targets' do
+        let!(:targets) { create_list(:target, 9, user:) }
+        it 'should return a sucessfull response' do
+          subject
+          expect(response).to have_http_status(:created)
+        end
+
+        it 'should add the target to the database' do
+          expect { subject }.to change(Target, :count).by(1)
+        end
+
+        it 'should return the target' do
+          subject
+          expect(response.body).to include_json(
+            {
+              title:,
+              radius:,
+              location:
+              {
+                x: latitude,
+                y: longitude
+              },
+              topic_id: topic.id,
+              user_id: user.id
+            }
+          )
+        end
+      end
     end
   end
 
@@ -71,6 +105,26 @@ describe 'Create Target', type: :request do
               "can't be blank"
             ]
           }
+        )
+      end
+    end
+
+    context 'with max targets reached' do
+      let(:headers) { user2.create_new_auth_token }
+
+      it 'should return an unprocessable entity status' do
+        subject
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it 'should not add the target to the database' do
+        expect { subject }.not_to change(Target, :count)
+      end
+
+      it 'should return the error message (Max targets reached)' do
+        subject
+        expect(response.body).to include_json(
+          error: 'Maximum number of targets reached'
         )
       end
     end
