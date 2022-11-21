@@ -28,4 +28,6 @@ class Target < ApplicationRecord
   validates :title, presence: true
   validates :radius, presence: true
   validates :location, presence: true
+
+  MAX_TARGETS = 10
 end

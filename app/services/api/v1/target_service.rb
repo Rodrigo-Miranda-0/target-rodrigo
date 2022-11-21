@@ -9,6 +9,8 @@ module Api
       end
 
       def create
+        raise MaxTargetError if @current_user.targets.count >= Target::MAX_TARGETS
+
         location = ActiveRecord::Point.new(@longitude, @latitude)
         @current_user.targets.create!(@target_params.merge(location:))
       end

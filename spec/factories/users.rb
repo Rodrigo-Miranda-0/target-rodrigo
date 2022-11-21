@@ -25,4 +25,10 @@ FactoryBot.define do
     password { Faker::Internet.password(min_length: 8) }
     gender { User.genders.values.sample }
   end
+
+  trait :with_targets do
+    after(:create) do |user|
+      create_list(:target, 10, user:)
+    end
+  end
 end
