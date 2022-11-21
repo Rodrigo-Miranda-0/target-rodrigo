@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :topic, only: :index
-      resources :user, only: :update
       resources :targets, only: %i[index create destroy]
       resources :user, only: :update
     end
