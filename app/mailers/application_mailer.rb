@@ -6,6 +6,6 @@ class ApplicationMailer < ActionMailer::Base
   def target_match(target)
     @target = target
     @user = target.user
-    mail(to: @user.email, subject: I18n.t('mailer.match.subject'))
+    mail(to: @user.email, subject: I18n.t('mailer.match.subject')) if @user.email.present?
   end
 end

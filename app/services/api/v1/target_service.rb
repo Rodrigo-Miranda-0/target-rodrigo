@@ -13,15 +13,12 @@ module Api
 
         location = "POINT(#{@longitude} #{@latitude})"
         new_target = @current_user.targets.create!(@target_params.merge(location:))
-        match
+        find_matches(new_target)
         new_target
       end
 
-      def match
-        location = "POINT(#{@longitude} #{@latitude})"
-        matched_targets = Target.where(topic_id: @target_params[:topic_id]).where.not(user_id: @current_user.id).where(
-          'ST_Distance(location, ?) < ?', location, @target_params[:radius]
-        )
+      def find_matches(new_target)
+        matched_targets = Target.by_topic(new_target.topic).not_by_user(@current_user.id).within_radius(new_target)
 
         matched_targets.each do |target|
           ApplicationMailer.target_match(target).deliver_now
