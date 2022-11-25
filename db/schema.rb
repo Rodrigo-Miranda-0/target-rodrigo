@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_10_183217) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_18_160830) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -43,6 +43,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_183217) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "conversations", force: :cascade do |t|
+    t.bigint "user1_id", null: false
+    t.bigint "user2_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user1_id", "user2_id"], name: "index_conversations_on_user1_id_and_user2_id", unique: true
+    t.index ["user1_id"], name: "index_conversations_on_user1_id"
+    t.index ["user2_id"], name: "index_conversations_on_user2_id"
+  end
+
   create_table "targets", force: :cascade do |t|
     t.string "title", null: false
     t.integer "radius", null: false
@@ -50,7 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_183217) do
     t.bigint "topic_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.point "location"
+    t.geography "location", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}, null: false
     t.index ["topic_id"], name: "index_targets_on_topic_id"
     t.index ["user_id"], name: "index_targets_on_user_id"
   end
@@ -79,6 +89,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_183217) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "conversations", "users", column: "user1_id"
+  add_foreign_key "conversations", "users", column: "user2_id"
   add_foreign_key "targets", "topics"
   add_foreign_key "targets", "users"
 end

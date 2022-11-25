@@ -3,7 +3,7 @@
 # Table name: targets
 #
 #  id         :bigint           not null, primary key
-#  location   :point
+#  location   :geography        not null, point, 4326
 #  radius     :integer          not null
 #  title      :string           not null
 #  created_at :datetime         not null
@@ -24,6 +24,10 @@
 class Target < ApplicationRecord
   belongs_to :topic
   belongs_to :user
+
+  scope :by_topic, ->(topic_id) { where(topic_id:) }
+  scope :not_by_user, ->(user_id) { where.not(user_id:) }
+  scope :within_radius, ->(target) { where('ST_Distance(location, ?) < ?', target.location, target.radius) }
 
   validates :title, presence: true
   validates :radius, presence: true
