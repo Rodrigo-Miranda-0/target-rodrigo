@@ -1,7 +1,6 @@
-<%= @user.email %> your target <%= @target.title %> just got matched!
+<%= I18n.t('mailer.match.title', user: @user.email, target: @target.title) %>
 ===============================================
 
-You can now have a conversation with the matched user.
-Remember to be polite and have a good time!
+<%= I18n.t('mailer.match.content') %>
 
-Thanks for using our services!
+<%= I18n.t('mailer.match.thanks') %>

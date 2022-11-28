@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Get conversations', type: :request do
+describe 'GET conversations', type: :request do
   subject { get api_v1_conversations_path, headers:, as: :json }
 
   let(:user) { create(:user) }
@@ -11,7 +11,6 @@ describe 'Get conversations', type: :request do
   context 'when user is logged in' do
     it 'returns all user conversations' do
       subject
-      p response.body
       result = JSON.parse(response.body)
       expect(result.pluck('id')).to match_array([conversation.id])
     end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Get targets', type: :request do
+describe 'GET targets', type: :request do
   subject { get api_v1_targets_path, headers:, as: :json }
 
   let(:user) { create(:user) }

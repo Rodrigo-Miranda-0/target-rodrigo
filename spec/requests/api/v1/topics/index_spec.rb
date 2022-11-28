@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Get topics', type: :request do
+describe 'GET topics', type: :request do
   subject { get api_v1_topic_index_path, headers:, as: :json }
 
   let(:user) { create(:user) }
