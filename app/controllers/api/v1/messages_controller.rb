@@ -8,10 +8,19 @@ module Api
         render json: { error: e.message }, status: :unprocessable_entity
       end
 
+      def index
+        conversation = Conversation.find(params[:conversation_id])
+        raise InvalidConversationError unless conversation.user1_id == @current_user.id || conversation.user2_id == @current_user.id
+
+        render json: { messages: conversation.messages.page(params[:page]) }, status: :ok
+      rescue InvalidConversationError => e
+        render json: { error: e.message }, status: :unprocessable_entity
+      end
+
       private
 
       def message_params
-        params.require(:message).permit(:content)
+        params.permit(:content)
       end
 
       def conversation_params

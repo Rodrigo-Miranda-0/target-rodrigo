@@ -11,9 +11,7 @@ describe 'POST Message', type: :request do
   let(:content) { Faker::Lorem.sentence }
   let(:params) do
     {
-      message: {
-        content:
-      }
+      content:
     }
   end
 

@@ -60,7 +60,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_24_210109) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
-    t.index ["user_id", "conversation_id"], name: "index_messages_on_user_id_and_conversation_id", unique: true
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
