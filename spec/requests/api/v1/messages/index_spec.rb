@@ -24,7 +24,6 @@ describe 'GET messages' do
 
     context 'rest of the pages' do
       let(:page) { 2 }
-
       it 'should return the messages paginated' do
         subject
         expect(ActiveSupport::JSON.decode(response.body)["messages"].count).to eq(5)
