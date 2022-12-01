@@ -24,6 +24,7 @@ require 'rails_helper'
 
 describe 'Message', type: :model do
   subject { build :message }
+
   context 'validations' do
     it { is_expected.to validate_presence_of(:content) }
     it { should belong_to(:conversation) }
