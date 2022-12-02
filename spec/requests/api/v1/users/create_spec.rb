@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Create User', type: :request do
+describe 'POST User', type: :request do
   subject { post '/api/v1/auth', params:, as: :json }
 
   let(:email)                 { 'test@test.com' }
