@@ -12,6 +12,7 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - spec/**/*
+    - app/admin/**/*
 
 Style/Documentation:
   Enabled: false
