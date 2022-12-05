@@ -1,6 +1,6 @@
 module Api
   module V1
-    class MessagesController < ApiController
+    class MessagesController < Api::V1::ApiController
       def create
         message = MessageService.new(message_params, current_user, conversation_params).create
         render json: message, status: :created
@@ -10,9 +10,9 @@ module Api
 
       def index
         conversation = Conversation.find(params[:conversation_id])
-        raise InvalidConversationError unless conversation.user1_id == @current_user.id || conversation.user2_id == @current_user.id
+        raise InvalidConversationError unless user_belongs_to_conversation?(conversation)
 
-        render json: { messages: conversation.messages.page(params[:page]) }, status: :ok
+        @messages = conversation.messages.page(params[:page])
       rescue InvalidConversationError => e
         render json: { error: e.message }, status: :unprocessable_entity
       end
@@ -20,7 +20,11 @@ module Api
       private
 
       def message_params
-        params.permit(:content)
+        params.require(:message).permit(:content)
+      end
+
+      def user_belongs_to_conversation?(conversation)
+        conversation.user1_id == @current_user.id || conversation.user2_id == @current_user.id
       end
 
       def conversation_params

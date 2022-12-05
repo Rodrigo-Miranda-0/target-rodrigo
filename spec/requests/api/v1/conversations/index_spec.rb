@@ -11,7 +11,7 @@ describe 'GET conversations', type: :request do
   context 'when user is logged in' do
     it 'returns all user conversations' do
       subject
-      result = JSON.parse(response.body)
+      result = JSON.parse(response.body)["conversations"]
       expect(result.pluck('id')).to match_array([conversation.id])
     end
   end

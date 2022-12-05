@@ -6,6 +6,7 @@ class CreateMessages < ActiveRecord::Migration[7.0]
       t.references :conversation, null: false, foreign_key: true
       t.timestamps
 
+      t.index [:user_id, :conversation_id], unique: true
     end
   end
 end
