@@ -29,3 +29,33 @@ User.find_or_create_by(email: "test3@test.com") do |user|
   user.password_confirmation = "password"
   user.name = "Test User 3"
 end
+
+# Create hardcoded test topics
+Topic.find_or_create_by(name: "Test Topic 1")
+
+Topic.find_or_create_by(name: "Test Topic 2")
+
+Topic.find_or_create_by(name: "Test Topic 3")
+
+# Create hardcoded test targets
+
+Target.find_or_create_by(title: "Test Target 1") do |target|
+  target.user_id = 1
+  target.topic_id = 1
+  target.radius = 100
+  target.location = "POINT(-58.3816 -34.6037)"
+end
+
+Target.find_or_create_by(title: "Test Target 2") do |target|
+  target.user_id = 2
+  target.topic_id = 2
+  target.radius = 100
+  target.location = "POINT(-58.3816 -34.6037)"
+end
+
+Target.find_or_create_by(title: "Test Target 3") do |target|
+  target.user_id = 3
+  target.topic_id = 3
+  target.radius = 100
+  target.location = "POINT(-58.3816 -34.6037)"
+end
