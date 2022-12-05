@@ -1,13 +1,5 @@
-class ApplicationController < ActionController::API
-  include DeviseTokenAuth::Concerns::SetUserByToken
+class ApplicationController < ActionController::Base
   include Rails.application.routes.url_helpers
 
-  before_action :configure_permitted_parameters, if: :devise_controller?
-  respond_to :json
-
-  protected
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :gender])
-  end
+  respond_to :json, :html
 end
