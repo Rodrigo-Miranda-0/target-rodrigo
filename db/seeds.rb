@@ -12,19 +12,19 @@ AdminUser.find_or_create_by(email: "admin@example.com") do |admin|
 end
 
 # Create hardcoded test users
-User.find_or_create_by(email: "test1@test.com") do |user|
+user1 = User.find_or_create_by(email: "test1@test.com") do |user|
   user.password = "password"
   user.password_confirmation = "password"
   user.name = "Test User 1"
 end
 
-User.find_or_create_by(email: "test2@test.com") do |user|
+user2 = User.find_or_create_by(email: "test2@test.com") do |user|
   user.password = "password"
   user.password_confirmation = "password"
   user.name = "Test User 2"
 end
 
-User.find_or_create_by(email: "test3@test.com") do |user|
+user3 = User.find_or_create_by(email: "test3@test.com") do |user|
   user.password = "password"
   user.password_confirmation = "password"
   user.name = "Test User 3"
@@ -58,4 +58,36 @@ Target.find_or_create_by(title: "Test Target 3") do |target|
   target.topic_id = 3
   target.radius = 100
   target.location = "POINT(-58.3816 -34.6037)"
+end
+
+# Create hardcoded test conversations
+
+Conversation.find_or_create_by(user1_id: user1.id) do |conversation|
+  conversation.user2_id = user2.id
+end
+
+Conversation.find_or_create_by(user1_id: user2.id) do |conversation|
+  conversation.user2_id = user3.id
+end
+
+# Create hardcoded test messages
+
+Message.find_or_create_by(content: "Test message 1") do |message|
+  message.conversation_id = 1
+  message.user_id = user1.id
+end
+
+Message.find_or_create_by(content: "Test message 2") do |message|
+  message.conversation_id = 1
+  message.user_id = user2.id
+end
+
+Message.find_or_create_by(content: "Test message 3") do |message|
+  message.conversation_id = 2
+  message.user_id = user2.id
+end
+
+Message.find_or_create_by(content: "Test message 4") do |message|
+  message.conversation_id = 2
+  message.user_id = user3.id
 end
