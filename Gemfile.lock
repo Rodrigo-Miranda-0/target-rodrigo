@@ -343,6 +343,7 @@ DEPENDENCIES
   factory_bot_rails (~> 6.2.0)
   faker (= 2.23.0)
   jbuilder (~> 2.11.5)
+  kaminari (~> 1.2.2)
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4)

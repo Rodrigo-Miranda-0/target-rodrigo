@@ -24,4 +24,8 @@ class Conversation < ApplicationRecord
   belongs_to :user2, class_name: 'User'
 
   has_many :messages, dependent: :destroy
+
+  def recipient_user(current_user)
+    current_user == user1 ? user2 : user1
+  end
 end

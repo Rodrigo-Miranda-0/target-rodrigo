@@ -42,6 +42,8 @@ gem 'active_storage_base64', '~> 2.0.0'
 
 gem 'activerecord-postgis-adapter', '~> 8.0.1'
 
+gem 'kaminari', '~> 1.2.2'
+
 gem 'activeadmin', '~> 2.13.1'
 
 gem 'sprockets-rails', '~> 3.4.2'
