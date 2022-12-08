@@ -10,10 +10,10 @@ module Api
 
       def index
         conversation = Conversation.find(params[:conversation_id])
-        raise InvalidConversationError unless user_belongs_to_conversation?(conversation)
+        raise UnauthorizedConversationError unless user_belongs_to_conversation?(conversation)
 
         @messages = conversation.messages.page(params[:page])
-      rescue InvalidConversationError => e
+      rescue UnauthorizedConversationError => e
         render json: { error: e.message }, status: :unprocessable_entity
       end
 
