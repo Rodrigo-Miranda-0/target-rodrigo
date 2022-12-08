@@ -18,3 +18,12 @@ en:
       subject: "You have a new message from %{user}"
       title: "You have a new message from %{user}"
       content: "%{message}"
+
+  active_admin:
+    dashboard:
+      title: "Dashboard"
+      welcome: "Welcome to Active Admin."
+      call_to_action: "To add dashboard sections, checkout 'app/admin/dashboard.rb'"
+    comments:
+      active: "Active"
+    users: "Users"
