@@ -13,3 +13,12 @@ en:
       title: "%{user} your target %{target} just got matched!"
       content: "You can now have a conversation with the matched user. Remember to be polite and hava a good time!"
       thanks: "Thanks for using Target MVD!"
+
+  active_admin:
+    dashboard:
+      title: "Dashboard"
+      welcome: "Welcome to Active Admin."
+      call_to_action: "To add dashboard sections, checkout 'app/admin/dashboard.rb'"
+    comments:
+      active: "Active"
+    users: "Users"

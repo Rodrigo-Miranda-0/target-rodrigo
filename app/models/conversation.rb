@@ -11,7 +11,7 @@
 # Indexes
 #
 #  index_conversations_on_user1_id               (user1_id)
-#  index_conversations_on_user1_id_and_user2_id  (user1_id,user2_id) UNIQUE
+#  index_conversations_on_user1_id_and_user2_id  (user1_id,user2_id)
 #  index_conversations_on_user2_id               (user2_id)
 #
 # Foreign Keys
