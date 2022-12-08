@@ -1,5 +1,6 @@
 ActiveAdmin.register Target do
-  filter :topic_id, as: :select, collection: Topic.all.map { |topic| [topic.name, topic.id] }
+  filter :topic_id, as: :select, collection: proc { Topic.all.map { |topic| [topic.name, topic.id] } }
+
   index do
     column :id
     column :title
