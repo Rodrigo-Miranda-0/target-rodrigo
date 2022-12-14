@@ -20,7 +20,7 @@ module Api
       private
 
       def message_params
-        params.permit(:content)
+        params.require(:message).permit(:content)
       end
 
       def user_belongs_to_conversation?(conversation)

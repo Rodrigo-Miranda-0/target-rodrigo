@@ -9,11 +9,7 @@ Rails.application.routes.draw do
       resources :targets, only: %i[index create destroy]
       resources :user, only: :update
       resources :conversations, only: :index
-      resources :messages, only: %i[index create] do
-        collection do
-          get :unread_messages
-        end
-      end
+      resources :messages, only: %i[index create]
     end
   end
 end
