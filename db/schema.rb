@@ -87,7 +87,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_14_150840) do
     t.bigint "user_id", null: false
     t.bigint "conversation_id", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
-    t.index ["user_id", "conversation_id"], name: "index_messages_on_user_id_and_conversation_id", unique: true
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
