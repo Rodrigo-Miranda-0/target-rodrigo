@@ -22,7 +22,3 @@ en:
     comments:
       active: "Active"
     users: "Users"
-    topic: 
-      on_create: "Topic created successfully"
-      on_update: "Topic updated successfully"
-      on_destroy: "Topic deleted successfully"
