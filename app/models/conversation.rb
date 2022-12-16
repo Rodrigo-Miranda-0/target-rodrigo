@@ -11,7 +11,7 @@
 # Indexes
 #
 #  index_conversations_on_user1_id               (user1_id)
-#  index_conversations_on_user1_id_and_user2_id  (user1_id,user2_id)
+#  index_conversations_on_user1_id_and_user2_id  (user1_id,user2_id) UNIQUE
 #  index_conversations_on_user2_id               (user2_id)
 #
 # Foreign Keys
@@ -24,4 +24,8 @@ class Conversation < ApplicationRecord
   belongs_to :user2, class_name: 'User'
 
   has_many :messages, dependent: :destroy
+
+  def recipient_user(current_user)
+    current_user == user1 ? user2 : user1
+  end
 end

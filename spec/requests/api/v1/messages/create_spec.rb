@@ -36,6 +36,21 @@ describe 'POST Message', type: :request do
         }
       )
     end
+
+    it 'should send an email to the other user' do
+      expect { subject }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      expect(ActionMailer::Base.deliveries.last.to).to include(user2.email)
+    end
+
+    it 'should send an email with the correct subject' do
+      subject
+      expect(ActionMailer::Base.deliveries.last.subject).to eq(I18n.t('mailer.message.subject'))
+    end
+
+    it 'should send an email with the correct content' do
+      subject
+      expect(ActionMailer::Base.deliveries.last.body).to include(content)
+    end
   end
 
   context 'when fails' do
@@ -80,6 +95,10 @@ describe 'POST Message', type: :request do
             error: "Couldn't find the record"
           }
         )
+      end
+
+      it 'should not send an email' do
+        expect { subject }.not_to change(ActionMailer::Base.deliveries, :count)
       end
     end
   end

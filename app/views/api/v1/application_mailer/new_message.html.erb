@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>
+     <%= I18n.t('mailer.message.title', user: @user.email) %>
+    </h1>
+    <p>
+      <%= I18n.t('mailer.message.content', message: @message.content) %>
+    </p>
+  </body>
+</html>

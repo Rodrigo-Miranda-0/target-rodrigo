@@ -10,9 +10,14 @@ en:
   
   mailer:
     match:
+      subject: "You have a new match!"
       title: "%{user} your target %{target} just got matched!"
       content: "You can now have a conversation with the matched user. Remember to be polite and hava a good time!"
       thanks: "Thanks for using Target MVD!"
+    message:
+      subject: "You have a new message from %{user}"
+      title: "You have a new message from %{user}"
+      content: "%{message}"
 
   active_admin:
     dashboard:
@@ -22,3 +27,4 @@ en:
     comments:
       active: "Active"
     users: "Users"
+    targets: "Targets"
