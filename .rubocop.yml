@@ -12,9 +12,13 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - spec/**/*
+    - app/admin/**/*
 
 Style/Documentation:
   Enabled: false
 
 Rails/FilePath:
   Enabled: false
+
+Metrics/AbcSize:
+  Max: 20
