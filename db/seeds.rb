@@ -59,3 +59,5 @@ Target.find_or_create_by(title: "Test Target 3") do |target|
   target.radius = 100
   target.location = "POINT(-58.3816 -34.6037)"
 end
+
+About.find_or_create_by(content: "About test")
