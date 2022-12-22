@@ -16,8 +16,9 @@
 #  index_admin_users_on_email                 (email) UNIQUE
 #  index_admin_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
-require 'rails_helper'
-
-RSpec.describe AdminUser, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+FactoryBot.define do
+  factory :admin_user do
+    email { Faker::Internet.email }
+    password { Faker::Internet.password }
+  end
 end

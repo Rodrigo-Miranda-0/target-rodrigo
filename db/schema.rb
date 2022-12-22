@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_05_144452) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_20_164648) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "abouts", force: :cascade do |t|
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -81,10 +87,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_05_144452) do
 
   create_table "messages", force: :cascade do |t|
     t.string "content"
-    t.bigint "user_id", null: false
-    t.bigint "conversation_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "read", default: false
+    t.bigint "user_id", null: false
+    t.bigint "conversation_id", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id", "conversation_id"], name: "index_messages_on_user_id_and_conversation_id", unique: true
     t.index ["user_id"], name: "index_messages_on_user_id"
@@ -128,8 +135,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_05_144452) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "conversations", "users", column: "user1_id"
   add_foreign_key "conversations", "users", column: "user2_id"
-  add_foreign_key "messages", "conversations"
-  add_foreign_key "messages", "users"
   add_foreign_key "targets", "topics"
   add_foreign_key "targets", "users"
 end

@@ -40,21 +40,21 @@ Topic.find_or_create_by(name: "Test Topic 3")
 # Create hardcoded test targets
 
 Target.find_or_create_by(title: "Test Target 1") do |target|
-  target.user_id = 1
+  target.user_id = user1.id
   target.topic_id = 1
   target.radius = 100
   target.location = "POINT(-58.3816 -34.6037)"
 end
 
 Target.find_or_create_by(title: "Test Target 2") do |target|
-  target.user_id = 2
+  target.user_id = user2.id
   target.topic_id = 2
   target.radius = 100
   target.location = "POINT(-58.3816 -34.6037)"
 end
 
 Target.find_or_create_by(title: "Test Target 3") do |target|
-  target.user_id = 3
+  target.user_id = user3.id
   target.topic_id = 3
   target.radius = 100
   target.location = "POINT(-58.3816 -34.6037)"
@@ -91,3 +91,5 @@ Message.find_or_create_by(content: "Test message 4") do |message|
   message.conversation_id = 2
   message.user_id = user3.id
 end
+
+About.find_or_create_by(content: "About test")
