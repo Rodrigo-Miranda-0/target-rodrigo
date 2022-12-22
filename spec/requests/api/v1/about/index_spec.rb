@@ -5,14 +5,13 @@ describe 'GET about', type: :request do
 
   let(:user) { create(:user) }
   let(:headers) { user.create_new_auth_token }
-  let(:about) { create(:about) }
+  let!(:about) { create(:about) }
 
   context 'when user is logged in' do
     it 'returns about' do
       subject
       result = JSON.parse(response.body)
-      p result
-      expect(result["about"]).to eq(about.content)
+      expect(result["content"]).to eq(about.content)
     end
   end
 
