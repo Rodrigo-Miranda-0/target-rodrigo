@@ -14,4 +14,11 @@ class ApplicationMailer < ActionMailer::Base
     @message = message
     mail(to: @user.email, subject: I18n.t('mailer.message.subject')) if @user.email.present?
   end
+
+  def ticket_email(user, ticket_params)
+    @user = user
+    @email = ticket_params[:email]
+    @message = ticket_params[:message]
+    mail(to: @email, subject: I18n.t('mailer.ticket.subject'), message: @message)
+  end
 end

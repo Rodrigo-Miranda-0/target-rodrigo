@@ -18,6 +18,11 @@ en:
       subject: "You have a new message from %{user}"
       title: "You have a new message from %{user}"
       content: "%{message}"
+    ticket:
+      subject: "You have a new ticket from %{user}"
+      title: "You have a new ticket from %{user}"
+      content: "%{message}"
+
 
   active_admin:
     dashboard:
@@ -28,3 +33,7 @@ en:
       active: "Active"
     users: "Users"
     targets: "Targets"
+
+  ticket:
+    success: "Ticket created successfully, we will contact you soon."
+    error: "There was an error creating the ticket, please try again later."
