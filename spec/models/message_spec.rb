@@ -15,6 +15,11 @@
 #  index_messages_on_conversation_id  (conversation_id)
 #  index_messages_on_user_id          (user_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (conversation_id => conversations.id)
+#  fk_rails_...  (user_id => users.id)
+#
 require 'rails_helper'
 
 describe 'Message', type: :model do

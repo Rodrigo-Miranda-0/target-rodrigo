@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :conversations, only: :index
       resources :messages, only: %i[index create]
       resources :about, only: :index
+      resources :tickets, only: :create
     end
   end
 end
