@@ -28,6 +28,7 @@ class Target < ApplicationRecord
   scope :by_topic, ->(topic_id) { where(topic_id:) }
   scope :not_by_user, ->(user_id) { where.not(user_id:) }
   scope :within_radius, ->(target) { where('ST_Distance(location, ?) < ?', target.location, target.radius) }
+  scope :a_week_ago, -> { where('created_at < ?', 1.week.ago) }
 
   validates :title, presence: true
   validates :radius, presence: true
