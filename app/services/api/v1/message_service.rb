@@ -1,18 +1,15 @@
 module Api
   module V1
     class MessageService
-      def initialize(message_params, current_user, conversation_id)
+      def initialize(message_params, current_user, conversation)
         @message_params = message_params
         @current_user = current_user
-        @conversation_id = conversation_id.fetch(:conversation_id)
+        @conversation = conversation
       end
 
       def create
-        conversation = Conversation.find(@conversation_id)
-        raise UnauthorizedConversationError unless conversation.user1_id == @current_user.id || conversation.user2_id == @current_user.id
-
-        @message = Message.create!(content: @message_params[:content], user: @current_user, conversation_id: @conversation_id)
-        notify(conversation) if @message.persisted?
+        @message = Message.create!(content: @message_params[:content], user: @current_user, conversation_id: @conversation.id)
+        notify(@conversation) if @message.persisted?
         @message
       end
 

@@ -3,12 +3,15 @@ module Api
     class ApiController < ActionController::API
       include DeviseTokenAuth::Concerns::SetUserByToken
       include ActiveStorage::SetCurrent
+      include Pundit::Authorization
+
       before_action :authenticate_user!
       before_action :configure_permitted_parameters, if: :devise_controller?
 
       rescue_from ActiveRecord::RecordNotFound,        with: :render_not_found
       rescue_from ActiveRecord::RecordInvalid,         with: :render_record_invalid
       rescue_from ActionController::ParameterMissing,  with: :render_parameter_missing
+      rescue_from Pundit::NotAuthorizedError,          with: :render_unauthorized
 
       protected
 
