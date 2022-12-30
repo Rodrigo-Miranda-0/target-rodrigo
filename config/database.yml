@@ -81,6 +81,9 @@ test:
 #
 production:
   <<: *default
-  database: target_production
-  username: target
+  adapter: postgis
+  host: <%= ENV["TARGET_DATABASE_HOST"] %>
+  port: <%= ENV["TARGET_DATABASE_PORT"] %>
+  database: <%= ENV["TARGET_DATABASE"] %>
+  username: <%= ENV["TARGET_DATABASE_USERNAME"] %>
   password: <%= ENV["TARGET_DATABASE_PASSWORD"] %>
