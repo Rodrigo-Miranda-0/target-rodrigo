@@ -78,3 +78,5 @@ group :development do
   gem "annotate", "~> 3.2.0"
 end
 
+
+gem "pundit", "~> 2.3"

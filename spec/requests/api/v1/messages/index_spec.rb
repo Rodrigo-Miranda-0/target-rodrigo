@@ -38,14 +38,14 @@ describe 'GET messages' do
 
       it 'should return a bad request response' do
         subject
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unauthorized)
       end
 
       it 'should return the error message' do
         subject
         expect(response.body).to include_json(
           {
-            error: 'The conversation you are trying to access is invalid'
+            error: 'You are not authorized to access this resource'
           }
         )
       end
